@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "testDirs": ["test"],
+  "dependencies": {
+    "karma": "^4.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "mocha": "^5.2.0"
+  }
+}
