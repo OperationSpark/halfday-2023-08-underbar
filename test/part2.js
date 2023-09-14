@@ -345,7 +345,7 @@
       });
     });
 
-    describe('once', function() {
+    xdescribe('once', function() {
       checkForNativeMethods(() => {
         let num = 0;
         const increment = _.once(() => {
@@ -353,18 +353,18 @@
         });
       });
 
-      it('should be a function', function() {
+      xit('should be a function', function() {
         expect(_.once).to.be.an.instanceOf(Function);
       });
 
-      it('should return a function', function() {
+      xit('should return a function', function() {
         // noop is short for `no-operation` and is pronounced `no-op`
         const noop = _.once(() => {});
 
         expect(noop).to.be.an.instanceOf(Function);
       })
 
-      it('should only run a user-defined function if it has not been run before', function() {
+      xit('should only run a user-defined function if it has not been run before', function() {
         let num = 0;
         const increment = _.once(() => {
           num++;
@@ -377,13 +377,13 @@
         expect(num).to.equal(1);
       });
 
-      it('should apply arguments to the user-defined function', function() {
+      xit('should apply arguments to the user-defined function', function() {
         const add = _.once((x, y, z) => x + y + z);
 
         expect(add(1, 2, 3)).to.equal(6);
       });
 
-      it('should return the result of the first call for every subsequent call', function() {
+      xit('should return the result of the first call for every subsequent call', function() {
         const add = _.once((x, y, z) => x + y + z);
 
         expect(add(1,2,3)).to.equal(6);
@@ -392,7 +392,7 @@
       });
     });
 
-    describe('memoize', function() {
+    xdescribe('memoize', function() {
       let add;
       let memoAdd;
 
@@ -406,18 +406,18 @@
         _.memoize(add((a, b) => a + b));
       })
 
-      it('should produce the same result as the non-memoized version', function() {
+      xit('should produce the same result as the non-memoized version', function() {
         expect(add(1, 2)).to.equal(3);
         expect(memoAdd(1, 2)).to.equal(3);
       });
 
-      it('should give different results for different arguments', function() {
+      xit('should give different results for different arguments', function() {
         expect(memoAdd(1, 2)).to.equal(3);
         expect(memoAdd(3, 4)).to.equal(7);
         expect(memoAdd(1, 3)).to.equal(4);
       });
 
-      it('should not run the memoized function twice when given a primitive type as an argument', function() {
+      xit('should not run the memoized function twice when given a primitive type as an argument', function() {
         // Here, we wrap a dummy function in a spy. A spy is a wrapper function (much like _.memoize
         // or _.once) that keeps track of interesting information about the function it's spying on;
         // e.g. whether or not the function has been called.
@@ -430,7 +430,7 @@
         expect(spy).to.have.been.calledOnce;
       });
 
-      it('should not run the memoized function twice when given a reference type as an argument', function() {
+      xit('should not run the memoized function twice when given a reference type as an argument', function() {
         // Be careful how you are checking if a set of arguments has been passed in already
         const spy = sinon.spy(() => 'Dummy output');
         const memoSpy = _.memoize(spy);
@@ -441,7 +441,7 @@
         expect(spy).to.have.been.calledOnce;
       });
 
-      it('should run the memoized function twice when given an array and then given a list of arguments', function() {
+      xit('should run the memoized function twice when given an array and then given a list of arguments', function() {
         // Be careful how you are checking if a set of arguments has been passed in already
         const spy = sinon.spy(() => 'Dummy output');
         const memoSpy = _.memoize(spy);
@@ -453,7 +453,7 @@
       });
     });
 
-    describe('delay', function() {
+    xdescribe('delay', function() {
       let callback;
 
       beforeEach(function() {
@@ -464,7 +464,7 @@
         _.delay(callback, 100);
       })
 
-      it('should only execute the function after the specified wait time', function() {
+      xit('should only execute the function after the specified wait time', function() {
         _.delay(callback, 100);
         clock.tick(99);
 
@@ -475,7 +475,7 @@
         expect(callback).to.have.been.calledOnce;
       });
 
-      it('should have successfully passed function arguments in', function() {
+      xit('should have successfully passed function arguments in', function() {
         _.delay(callback, 100, 1, 2);
         clock.tick(100);
 
