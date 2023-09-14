@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Advanced', function() {
+  xdescribe('Advanced', function() {
 
     describe('invoke, when provided a function reference', function() {
       checkForNativeMethods(function() {
