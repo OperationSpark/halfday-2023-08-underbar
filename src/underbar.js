@@ -140,11 +140,21 @@ return tempArray;
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
 
+    let tempArray = [];
+    if(Array.isArray(collection)){
+      for(let i = 0; i < collection.length; i++){
+        iterator(collection[i],i, collection)
+        tempArray.push(iterator(collection[i]))
+          }
+    }
+    else {
+      for (let key in collection){
+        iterator(collection[key], key, collection)
+        tempArray.push(iterator(collection[i]))
+      }
+    }
 
-
-
-
-    
+    return tempArray;
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
@@ -189,6 +199,31 @@ return tempArray;
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    if(Array.isArray(collection)){
+      if (accumulator === undefined){
+        accumulator = collection[0];
+        for(let i = 1; i < collection.length; i++){
+          accumulator = iterator(accumulator, collection[i])
+        }
+      } else{
+        for(let i = 0; i < collection.length; i++){
+          accumulator = iterator(accumulator, collection[i])
+        }
+      }
+    }
+    else {
+      if (accumulator === undefined){
+        accumulator = collection[0];
+        for(let key in collection){
+          accumulator = iterator(accumulator, collection[key]) //How the heck do I change iteration length for an object?
+        }
+      } else{
+        for(let key in collection){
+          accumulator = iterator(accumulator, collection[key])
+        }
+      }
+    }
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -207,11 +242,75 @@ return tempArray;
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    if(iterator === undefined){
+      if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+          if(!collection[i]){
+            return false;
+          }
+      }
+    }
+    else {
+      for(let key in collection){
+        if(!collection[i]){
+          return false;
+        }
+      }
+    }
+      return true;
+    }
+    if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+          if(!iterator(collection[i])){
+            return false;
+          }
+      }
+    }
+    else {
+      for(let key in collection){
+        if(!iterator(collection[i])){
+          return false;
+        }
+      }
+    }
+    return true;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
+    if(iterator === undefined){
+      if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+          if(collection[i]){
+            return true;
+          }
+      }
+    }
+    else {
+      for(let key in collection){
+        if(collection[i]){
+          return true;
+        }
+      }
+    }
+      return false;
+    }
+    if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+          if(iterator(collection[i])){
+            return true;
+          }
+      }
+    }
+    else {
+      for(let key in collection){
+        if(iterator(collection[i])){
+          return true;
+        }
+      }
+    }
+    return false;
     // TIP: There's a very clever way to re-use every() here.
   };
 
@@ -234,7 +333,11 @@ return tempArray;
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
+  _.extend = function(obj, ...rest) {
+    // for(let i = 0; i < rest.length; i++){
+    // }
+    obj = {obj, ...rest};
+
   };
 
   // Like extend, but doesn't ever overwrite a key that already
