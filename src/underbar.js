@@ -151,10 +151,10 @@
 
     const newArray = []
 
-    _.each(collection, function (value, key, collection){
+    _.each(collection, function (value, key, collection) {
 
       newArray.push(iterator(value, key, collection))
-    
+
     })
 
     return newArray
@@ -199,7 +199,29 @@
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
-  _.reduce = function (collection, iterator, accumulator) {
+  _.reduce = function (collection, iterator, seed) {
+
+
+    for (let i = 0; i < collection.length; i++) {
+      if (!seed) {
+        seed = collection[i]
+        var result = iterator(seed, collection[i])
+        return result
+
+      }
+
+      else if (seed) {
+        var result = iterator(seed, collection[i])
+        return result
+      }
+      return seed
+
+
+      if (result === undefined) {
+        iterator(seed, collection[i])
+      }
+    }
+
   };
 
   // Determine if the array or object contains a given value (using `===`).
