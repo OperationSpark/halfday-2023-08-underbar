@@ -38,6 +38,9 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function (array, n) {
+    //return the last number if n is not defined
+    //if n defined return the the the value starting at negative n and ending at the last value in the array
+    //if n equal to 0 do .slice(-n, 0)
     return n === undefined ? array[array.length - 1] : array.slice(-n, (n === 0 ? 0 : array.length));  //migth change in the future
   };
 
@@ -47,16 +50,18 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function (collection, iterator) {
-
+    //check if the collection is an array
     if (Array.isArray(collection)) {
-
+      //loop through the given collection
       for (let i = 0; i < collection.length; i++) {
+        //run the iterator and give it the current value, it's index, and the array itself 
         iterator(collection[i], i, collection)
       }
-
+      //run if collection is a object
     } else {
-
+      //loop through the given collection
       for (let key in collection) {
+        //run the iterator and give it the current value, it's key name, and the object itself 
         iterator(collection[key], key, collection)
       }
 
@@ -83,13 +88,17 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function (collection, test) {
+    //create an empty array
     let value = [];
-
+    //loop through the collection
     for (let i = 0; i < collection.length; i++) {
+      //check if the given test return true after given it the current value, index and the collection itself
       if (test(collection[i], i, collection)) {
+        //push the current value into the value array 
         value.push(collection[i]);
       }
     }
+    //return value
     return value;
   };
 
@@ -97,15 +106,20 @@
   _.reject = function (collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    let True = _.filter(collection, test);
-    let arr = []
 
+    //create two array where one will hold values that past the test and the other array will be empty
+    let True = _.filter(collection, test);
+    let False = []
+    //loop through the collection
     for (let i = 0; i < collection.length; i++) {
+      //check if the current value is not in the True array
       if (!True.includes(collection[i])) {
-        arr.push(collection[i])
+        //push the current value into the false array
+        False.push(collection[i])
       }
     }
-    return arr;
+    //return the false array
+    return False;
   };
 
   // Produce a duplicate-free version of the array.
@@ -142,6 +156,15 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    //create a empty array
+    var arr = [];
+    //loop through the collection 
+    for (let i = 0; i < collection.length; i++) {
+      //push the the value return from iterator that was given the current value, it index, and the collection it self
+      arr.push(iterator(collection[i], i, collection))
+    }
+    //return arr
+    return arr;
   };
 
   /*
@@ -183,19 +206,60 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function (collection, iterator, accumulator) {
+    //check if accumulator is defined
+    if (accumulator === undefined) {
+      //set the accumulator to equal the first value in the collection
+      accumulator = collection[0];
+      //loop through the collection
+      for (let i = 1; i < collection.length; i++) {
+        //set the accumulator equal to the return value of the iterator after give it the accumulator, the current value, the index, and the collection
+        accumulator = iterator(accumulator, collection[i], i, collection)
+      }
+      //return the accumulator
+      return accumulator
+    }
+    //loop through the collection
+    for (let i = 0; i < collection.length; i++) {
+      //set the accumulator equal to the return value of the iterator after give it the accumulator, the current value, the index, and the collection
+      accumulator = iterator(accumulator, collection[i], i, collection)
+    }
+    //return the accumulator
+    return accumulator
   };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function (collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, (wasFound, item) => {
+    //create a empty variable
+    let array;
+    //check if collection is an array or object
+    if (Array.isArray(collection)) {
+      //set array to equal the collection
+      array = collection;
+      //run if collection is a object
+    } else {
+      //set array to equal a empty array
+      array = [];
+      //loop through the collection
+      for (let key in collection) {
+        //push the value from the current key into array
+        array.push(collection[key]);
+      }
+    }
+    //return the value from reduce that was given the array, a function, and a false value
+    return _.reduce(array, (wasFound, item) => {
+      //check if wasFound equal true
       if (wasFound) {
+        //return true
         return true;
       }
+      //return true or false if the current item is equal to the given target
       return item === target;
+
     }, false);
-  };
+  }
+
 
 
   // Determine whether all of the elements match a truth test.
