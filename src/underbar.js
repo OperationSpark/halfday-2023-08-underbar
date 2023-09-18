@@ -201,7 +201,7 @@
   //          No accumulator is given so the first element is used.
   _.reduce = function (collection, iterator, seed) {
     let start = 0 // Used to determine where the loop will start.
-    if (seed === undefined){
+    if (seed === undefined) {
       //If the value of seed is not defined then change value to collection index 0 and start to 1
       seed = collection[0]
       start = 1
@@ -218,13 +218,13 @@
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
 
-    if (Array.isArray(collection)){
+    if (Array.isArray(collection)) {
       return _.reduce(collection, (wasFound, item) => {
-      if (wasFound) {
-        return true;
-      }
-      return item === target;
-    }, false);
+        if (wasFound) {
+          return true;
+        }
+        return item === target;
+      }, false);
     } else {
       for (const key in collection) {
         if (collection[key] === target) {
@@ -233,7 +233,7 @@
           return false
         }
         //if any value in collection is === to target
-      }    
+      }
     }
   };
 
@@ -241,6 +241,26 @@
   // Determine whether all of the elements match a truth test.
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
+
+    if (collection.length === 0) {
+      return true
+    }
+
+
+    var anArray = _.filter(collection, function (item) {
+      return iterator(item)
+    }) 
+
+
+    if(collection.length === anArray.length){
+      return true
+    }
+
+
+
+
+
+
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
