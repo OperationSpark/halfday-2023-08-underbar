@@ -200,40 +200,41 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function (collection, iterator, seed) {
-
-
-    for (let i = 0; i < collection.length; i++) {
-      if (!seed) {
-        seed = collection[i]
-        var result = iterator(seed, collection[i])
-        return result
-
-      }
-
-      else if (seed) {
-        var result = iterator(seed, collection[i])
-        return result
-      }
-      return seed
-
-
-      if (result === undefined) {
-        iterator(seed, collection[i])
-      }
+    let start = 0 // Used to determine where the loop will start.
+    if (seed === undefined){
+      //If the value of seed is not defined then change value to collection index 0 and start to 1
+      seed = collection[0]
+      start = 1
     }
 
+    for (let i = start; i < collection.length; i++) {
+      seed = iterator(seed, collection[i])
+    }
+    return seed
   };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function (collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, (wasFound, item) => {
+
+    if (Array.isArray(collection)){
+      return _.reduce(collection, (wasFound, item) => {
       if (wasFound) {
         return true;
       }
       return item === target;
     }, false);
+    } else {
+      for (const key in collection) {
+        if (collection[key] === target) {
+          return true
+        } else {
+          return false
+        }
+        //if any value in collection is === to target
+      }    
+    }
   };
 
 
