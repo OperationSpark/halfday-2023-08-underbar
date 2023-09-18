@@ -270,23 +270,31 @@
   // Determine whether all of the elements match a truth test.
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
-
+    //check if collection is an array
     if (Array.isArray(collection)) {
+      //create a variable that will equal the return value of _.reduce
       let test = _.reduce(collection, function (value, cur) {
+        //check if the iterator is defined
         if (iterator === undefined) {
+          //check if the cur value is false or the value value is false
           if (cur === false || value === false) {
+            //if so return false
             return false
+            //run if cur or value is true
           } else {
+            //return true
             return true
           }
         }
-
+        //check if the cur value after running through the iterator is false or the value value is false
         if (!iterator(cur) || value === false) {
+          //return false
           return false
         }
+        //return true
         return true
       }, true)
-
+      //return test
       return test
     }
   };
@@ -295,38 +303,58 @@
   // provided, provide a default one
   _.some = function (collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    //check if the collection is defined and has a value in it's array
     if (collection === undefined || !Array.isArray(collection) || collection.length === 0) {
+      //return false
       return false
     }
+    //check if iterator is undefined
     if (iterator === undefined) {
+      //create a variable that will equal the return value of _.reduce
       let noIterator = _.reduce(collection, function (seed, value) {
+        //check if the value value is false or the seed value is false
         if (value === true || seed === true) {
+          //return true
           return true
+          //run if value and seed equal false
         } else {
+          //return true
           return false
         }
       }, false)
+      //return onIterator
       return noIterator
     }
 
+    //create a variable that hold a true or false value after running the _.every function
+    //this test if there at least one false value in the collection
     let test = _.every(collection, function (value) {
+      //check if the iterator return false
       if (!iterator(value)) {
+        //return true
         return true
+        //run if iterator return true
       } else {
+        //return false
         return false
       }
     })
-
+    //create a variable that hold a true or false value after running the _.every function
+    //this test if all values in the collection are true
     let test2 = _.every(collection, iterator)
+    //check if test 2 equal
     if (test2 === true) {
+      //return true
       return true
+      //check if test equal true
     } else if (test === true) {
+      //return false
       return false
+      //check if test equal false
     } else if (test === false) {
+      //return true
       return true
     }
-
-
   };
 
 
@@ -349,30 +377,35 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function (obj, ...obj2) {
-
+    //loop through obj2
     for (let i = 0; i < obj2.length; i++) {
+      //loop through the current object in obj2
       for (let key in obj2[i]) {
-
+        //set the current key in obj to equal the current key in the current object in obj2
+        //or create a new key in obj with current key in the current object in obj2
         obj[key] = obj2[i][key]
-
       }
     }
-
+    //return obj
     return obj
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function (obj, ...obj2) {
-
+    //loop through obj2
     for (let i = 0; i < obj2.length; i++) {
+      //loop through the current object in obj2
       for (let key in obj2[i]) {
+        //check if obj doesn't have key that has the same name as the current key in the current object in obj2 
+        //and should work with false values example:(a:'' , b:NaN, c:false)                                       ///STILL NEED TO WORK ON
         if (!obj[key] || obj[key] === NaN) {
+          //create a new key in onj with current key in the current object in obj2
           obj[key] = obj2[i][key]
         }
       }
     }
-
+    //return obj
     return obj
   };
 
