@@ -265,12 +265,17 @@
   // Determine whether all of the elements match a truth test.
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
-    let isTrue = true
+
     if (Array.isArray(collection)) {
       let test = _.reduce(collection, function (value, cur) {
-        // if (cur === false || cur === undefined) {
-        //   return false
-        // }
+        if (iterator === undefined) {
+          if (cur === false || value === false) {
+            return false
+          } else {
+            return true
+          }
+        }
+
         if (!iterator(cur) || value === false) {
           return false
         }
@@ -285,6 +290,38 @@
   // provided, provide a default one
   _.some = function (collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    if (collection === undefined || !Array.isArray(collection) || collection.length === 0) {
+      return false
+    }
+    if (iterator === undefined) {
+      let noIterator = _.reduce(collection, function (seed, value) {
+        if (value === true || seed === true) {
+          return true
+        } else {
+          return false
+        }
+      }, false)
+      return noIterator
+    }
+
+    let test = _.every(collection, function (value) {
+      if (!iterator(value)) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    let test2 = _.every(collection, iterator)
+    if (test2 === true) {
+      return true
+    } else if (test === true) {
+      return false
+    } else if (test === false) {
+      return true
+    }
+
+
   };
 
 
@@ -306,12 +343,32 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function (obj) {
+  _.extend = function (obj, ...obj2) {
+
+    for (let i = 0; i < obj2.length; i++) {
+      for (let key in obj2[i]) {
+
+        obj[key] = obj2[i][key]
+
+      }
+    }
+
+    return obj
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function (obj) {
+  _.defaults = function (obj, ...obj2) {
+
+    for (let i = 0; i < obj2.length; i++) {
+      for (let key in obj2[i]) {
+        if (!obj[key] || obj[key] === NaN) {
+          obj[key] = obj2[i][key]
+        }
+      }
+    }
+
+    return obj
   };
 
 
