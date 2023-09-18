@@ -150,6 +150,11 @@
     return arr
   };
 
+  // make an iterated array to keep track of iterated items
+  // determine if iterator exists
+  // if it does, iterate over array and push iterator(item) to iterated
+  // if iterated does not include iterator(item), push item to result
+  // if it does not, iterate over array and push item to iterated
 
   // Return the results of applying an iterator to each element.
   _.map = function (collection, iterator) {
