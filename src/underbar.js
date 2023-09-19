@@ -455,8 +455,6 @@ return tempArray;
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function (array) {
-<<<<<<< HEAD
-=======
     let resultingArray = array.slice();
     console.log(resultingArray)
     for(let i = resultingArray.length - 1; i >= 0; i--){
@@ -466,7 +464,6 @@ return tempArray;
       resultingArray[randomIndex] = resultingArray[i];
       resultingArray[i] = tempIndex;
     }
->>>>>>> 0a0cfe6 (finished main objectives)
 
     return resultingArray;
   };
