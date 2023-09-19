@@ -242,8 +242,17 @@
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
     console.log(iterator)
+
+    var result 
     if(!iterator){
-      return iterator = collection[0]
+      for(let i = 0; i < collection.length; i++){
+        if(!collection[i]){
+          result = false
+        } else {
+          result = true
+        }
+      }
+      return result
     }
 
     if (collection.length === 0) {
