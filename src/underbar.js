@@ -243,10 +243,10 @@
     // TIP: Try re-using reduce() here.
     console.log(iterator)
 
-    var result 
-    if(!iterator){
-      for(let i = 0; i < collection.length; i++){
-        if(!collection[i]){
+    var result
+    if (!iterator) {
+      for (let i = 0; i < collection.length; i++) {
+        if (!collection[i]) {
           result = false
         } else {
           result = true
@@ -254,46 +254,33 @@
       }
       return result
     }
+    // if no iterator is provided
 
     if (collection.length === 0) {
       return true
     }
+    // if an empty collection is provided
 
 
     let anArray = _.filter(collection, function (item) {
       return iterator(item)
-    }) 
+    })
+    // the array that contains all of the items
 
-    // let negArray = _.reject(collection, function(item){
-    //   return iterator(item)
-    // })
-    // //console.log(negArray)
-
-    for (let i = 0; i < collection.length; i++) {
-      const element = collection[i];
-      let badArray = []
-      if (element !== true){
-        badArray.push[element]
-      }
-      
-    }
-    // console.log(badArray)
-    if(collection.length === anArray.length){
+    if (collection.length === anArray.length) {
       return true
     }
-    if(anArray.length === 0){
+    // if the array has all truthy values return true
+
+    if (anArray.length === 0) {
       return false
     }
-    if(anArray.length > 0 && anArray.length < collection.length){
+    // if the array has no truthy values, return false
+
+    if (anArray.length > 0 && anArray.length < collection.length) {
       return false
     }
-    
-    // loop through an array and test if each variable is true/false
-    //if thevariable is all false
-
-
-
-
+    // if the array has some truthy but some false, return false
 
 
   };
@@ -302,6 +289,45 @@
   // provided, provide a default one
   _.some = function (collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+
+    if (collection.length === 0) {
+      return false
+    }
+    // if an empty collection is provided
+
+    if (!iterator) {
+      for (let i = 0; i < collection.length; i++) {
+        if (!collection[i]) {
+          return false
+        } else {
+          return true
+        }
+      }
+    }
+    // if no iterator is provided
+
+    let anArray = _.filter(collection, function (item) {
+      return iterator(item)
+    })
+    // the array that contains all of the items
+
+    if (collection.length === anArray.length) {
+      return true
+    }
+    // if the array has all truthy values return true
+
+
+    if (anArray.length === 0) {
+      return false
+    }
+    // if the array has no truthy values, return false
+
+
+    if (anArray.length > 0 && anArray.length < collection.length) {
+      return true
+    }
+    // if the array has some truthy but some false, return true
+
   };
 
 
@@ -324,6 +350,9 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function (obj) {
+
+
+    
   };
 
   // Like extend, but doesn't ever overwrite a key that already
