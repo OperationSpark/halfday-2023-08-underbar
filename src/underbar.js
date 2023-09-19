@@ -122,7 +122,13 @@
     return False;
   };
 
+  // make an iterated array to keep track of iterated items
+  // determine if iterator exists
+  // if it does, iterate over array and push iterator(item) to iterated
+  // if iterated does not include iterator(item), push item to result
+  // if it does not, iterate over array and push item to iterated
   // Produce a duplicate-free version of the array.
+
   _.uniq = function (array, isSorted, iterator) {
     //create a empty array
     let arr = [];
@@ -141,20 +147,15 @@
     } else {
       //loop through the given array
       for (let i = 0; i < array.length; i++) {
-        if (!arr.includes(array[i]) && iterator(array[i], i, array)) {
+        if (!arr2.includes(iterator(array[i]))) {
           arr.push(array[i]);
+          arr2.push(iterator(array[i]));
         }
       }
     }
     //return arr
     return arr
   };
-
-  // make an iterated array to keep track of iterated items
-  // determine if iterator exists
-  // if it does, iterate over array and push iterator(item) to iterated
-  // if iterated does not include iterator(item), push item to result
-  // if it does not, iterate over array and push item to iterated
 
   // Return the results of applying an iterator to each element.
   _.map = function (collection, iterator) {
@@ -398,10 +399,9 @@
       //loop through the current object in obj2
       for (let key in obj2[i]) {
         //check if obj doesn't have key that has the same name as the current key in the current object in obj2 
-        //and should work with false values example:(a:'' , b:NaN, c:false)                                       ///STILL NEED TO WORK ON
-        if (!obj[key] || obj[key] === NaN) {
+        if (obj[key] === undefined) {
           //create a new key in onj with current key in the current object in obj2
-          obj[key] = obj2[i][key]
+          obj[key] = obj2[i][key];
         }
       }
     }
