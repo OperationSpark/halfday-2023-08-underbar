@@ -241,20 +241,46 @@
   // Determine whether all of the elements match a truth test.
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
+    console.log(iterator)
+    if(!iterator){
+      return iterator = collection[0]
+    }
 
     if (collection.length === 0) {
       return true
     }
 
 
-    var anArray = _.filter(collection, function (item) {
+    let anArray = _.filter(collection, function (item) {
       return iterator(item)
     }) 
 
+    // let negArray = _.reject(collection, function(item){
+    //   return iterator(item)
+    // })
+    // //console.log(negArray)
 
+    for (let i = 0; i < collection.length; i++) {
+      const element = collection[i];
+      let badArray = []
+      if (element !== true){
+        badArray.push[element]
+      }
+      
+    }
+    // console.log(badArray)
     if(collection.length === anArray.length){
       return true
     }
+    if(anArray.length === 0){
+      return false
+    }
+    if(anArray.length > 0 && anArray.length < collection.length){
+      return false
+    }
+    
+    // loop through an array and test if each variable is true/false
+    //if thevariable is all false
 
 
 
