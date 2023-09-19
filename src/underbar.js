@@ -277,8 +277,7 @@ return tempArray;
         }
       }
     }
-      return true;
-    }
+
     if(Array.isArray(collection)){
         for(let i = 0; i < collection.length; i++){
           if(!iterator(collection[i])){
@@ -321,15 +320,6 @@ return tempArray;
         if (iterator(collection[i])) {
           return true;
         }
-      }
-    }
-      return false;
-    }
-    if(Array.isArray(collection)){
-        for(let i = 0; i < collection.length; i++){
-          if(iterator(collection[i])){
-            return true;
-          }
       }
     }
     else {
