@@ -241,7 +241,7 @@
   // Determine whether all of the elements match a truth test.
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
-    console.log(iterator)
+    //console.log(iterator)
 
     var result
     if (!iterator) {
@@ -350,22 +350,36 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function (obj, ...otherObj) {
-
-    const args = Array.from(arguments)
-
-   // console.log(arguments)
-    
-    return obj 
-
-   
-   
-
-
+    // get args inside of obj
+    // Get acess to the objects in otherObj 
+    // Once acess to the objects then use object.assign to copy over potential object proberties onto other objs
+    for (let i = 0; i < otherObj.length; i++) {
+      const addedObj = otherObj[i];
+      Object.assign(obj, addedObj)
+    }
+    return obj
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function (obj) {
+  _.defaults = function (obj, ...arrayOfObj) {
+    
+    for (const otherObj of arrayOfObj) {
+      console.log(otherObj)
+      //use forin loop to acess each key
+      for (const key in otherObj) {
+        if(obj[key] === otherObj[key]){
+          break
+        } else {
+          obj[key] = otherObj[key]
+        }
+        
+      }
+      //see if obj has any similar probeties of otherObj
+      //if it does then don't do anything, but if it doesnt then give obj that property
+
+    }
+    return obj
   };
 
 
