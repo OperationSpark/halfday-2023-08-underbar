@@ -450,11 +450,14 @@
 
     console.log(clone)
 
-    for(let i = 0; i < array.length; i++){
-      var rand = Math.floor(Math.random() * (i + 1));
-      var temp = clone[rand]
-      clone[i] = temp
-    }
+    // for(let i = 0; i < array.length; i++){
+    //   var rand = Math.floor(Math.random() * (i + 1));
+    //   var temp = clone[rand]
+    //   clone[i] = temp
+    // }
+
+
+    clone.sort(() => (Math.random() > 0.5) ? 1 : -1)
     return clone
 
   };
