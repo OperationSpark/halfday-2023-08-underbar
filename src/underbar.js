@@ -451,9 +451,11 @@
   // instead if possible.
   _.memoize = function (func) {
     //create an empty object
-    const call = { f: undefined };
+    //const call = { f: undefined };   didn't work
+    const call = {};
     //check if that function is in call
-    if (func in call.f === func) {
+    //if(func in call.f === func)    didn't work
+    if (func in call) {
       //return the called function in call
       return call[func];
     } else {
