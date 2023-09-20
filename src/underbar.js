@@ -368,8 +368,8 @@
       console.log(otherObj)
       //use forin loop to acess each key
       for (const key in otherObj) {
-        if(obj[key] === otherObj[key]){
-          break
+        if(key in obj){
+          
         } else {
           obj[key] = otherObj[key]
         }
