@@ -420,7 +420,7 @@
 
   // Return a function that can be called at most one time. Subsequent calls
   // should return the previously returned value.
-  _.once = function (func) {                           ////don't do
+  _.once = function (func) {
     // TIP: These variables are stored in a "closure scope" (worth researching),
     // so that they'll remain available to the newly-generated function every
     // time it's called.
@@ -449,7 +449,20 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
-  _.memoize = function (func) {      /// don't do
+  _.memoize = function (func) {
+    //create an empty object
+    const call = { f: undefined };
+    //check if that function is in call
+    if (func in call.f === func) {
+      //return the called function in call
+      return call[func];
+    } else {
+      //create that function in call
+      call[func] = func;
+      //return that given function
+      return func
+    }
+
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -458,7 +471,20 @@
   // The arguments for the original function are passed after the wait
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
-  _.delay = function (func, wait) {      /// don't do
+  _.delay = function (func, wait, a, b) {
+    //check if a and b has a value
+    if (a !== undefined && b !== undefined) {
+      //give the function a and b then run it after a certain amount of time
+      setTimeout(func(a, b), wait)
+      //run if only A has a value
+    } else if (a !== undefined) {
+      //give the function A then run it after a certain amount of time
+      setTimeout(func(a), wait)
+      //run if a and b are not defined
+    } else {
+      //run the function after a certain amount of time
+      setTimeout(func, wait)
+    }
   };
 
 
