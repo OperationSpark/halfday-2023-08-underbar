@@ -241,7 +241,6 @@
   // Determine whether all of the elements match a truth test.
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
-    //console.log(iterator)
 
     var result
     if (!iterator) {
@@ -365,7 +364,6 @@
   _.defaults = function (obj, ...arrayOfObj) {
     
     for (const otherObj of arrayOfObj) {
-      console.log(otherObj)
       //use forin loop to acess each key
       for (const key in otherObj) {
         if(key in obj){
@@ -446,6 +444,19 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function (array) {
+
+
+    const clone = array.slice()
+
+    console.log(clone)
+
+    for(let i = 0; i < array.length; i++){
+      var rand = Math.floor(Math.random() * (i + 1));
+      var temp = clone[rand]
+      clone[i] = temp
+    }
+    return clone
+
   };
 
 
