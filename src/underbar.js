@@ -501,6 +501,25 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function (array) {
+    //create an empty array
+    let copy = [];
+    //loop through the given array
+    for (let i = 0; i < array.length; i++) {
+      //create a variable equal to the current slice value
+      let value = array.slice(i, i + 1)
+      //create a variable that hold a 0 or 1
+      let num = Math.floor(Math.random() * 2);
+      //check if num is equal to 0
+      if (num === 0) {
+        //push the current value in to copy in the front of the array
+        copy.push(value[0])
+      } else {
+        //push the current value in to copy in the back of the array
+        copy.unshift(value[0])
+      }
+    }
+    //return copy
+    return copy;
   };
 
 
